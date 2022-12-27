@@ -7,3 +7,6 @@ jobs:
   use-actions:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
+    - name: Weather
+      run: curl http://wttr.in/paris
