@@ -1,0 +1,12 @@
+name: Example of simple workflow
+
+on:
+  workflow_dispatch:
+
+run-name: Present GitHub Action
+
+jobs:
+  simple-job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello there !"

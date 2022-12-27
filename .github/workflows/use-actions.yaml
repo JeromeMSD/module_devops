@@ -1,0 +1,9 @@
+name: Example of Action workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  use-actions:
+    runs-on: ubuntu-latest
+    steps:
