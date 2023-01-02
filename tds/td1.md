@@ -13,6 +13,7 @@ Jouons avec l'outil `git`
 #### Enoncé
 
 Rendez-vous sur https://learngitbranching.js.org/
+
 En suivant les instructions de chaque exercice, complétez chacun des niveaux.
 
 <center><b>Appelez-moi pour valider la complétion.</b></center>
@@ -20,6 +21,7 @@ En suivant les instructions de chaque exercice, complétez chacun des niveaux.
 #### Questions
 
 Vous avez terminés les exercices ?
+
 Bien joué ! mais pouvez-vous répondre à ces trois questions.
 
 1. Quelle est la différence entre `git reset HEAD^1` et `git revert [last_commit]` ?
