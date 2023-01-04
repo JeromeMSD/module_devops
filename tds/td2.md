@@ -29,13 +29,15 @@ Maintenant, initions les bonnes pratiques :
 
 * Les prénoms et noms de chacun d’entre vous
 * Votre spécialité ( ILC ou SQR )
-* Un descriptif rapide du langage que vous souhaitez utiliser pour le projet
 * Différentes sections et sous-sections pour chacun des exercices.
-* Terminer par une sections de premier niveau ( hors titre ) “Statuts actions”
+* Un lien vers votre compte GitHub.
+* Insérer une image via ! en donnant le lien vers l’image de votre choix.
+* Terminer par une sections de premier niveau ( hors titre ) “Statuts actions” 
 
 Besoins d’aides ? 
 
 → [Documentation README/Markdown](https://www.makeareadme.com/)
+
 → [Documentation README/Markdown](https://www.markdownguide.org/cheat-sheet/)
 
 ## Automatiser votre dépôt
