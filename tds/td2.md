@@ -38,7 +38,7 @@ Besoins d’aides ?
 
 → [Documentation README/Markdown](https://www.makeareadme.com/)
 
-→ [Documentation README/Markdown](https://www.markdownguide.org/cheat-sheet/)
+→ [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
 
 ## Automatiser votre dépôt
 
