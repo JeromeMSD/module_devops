@@ -33,7 +33,10 @@ Maintenant, initions les bonnes pratiques :
 * Différentes sections et sous-sections pour chacun des exercices.
 * Terminer par une sections de premier niveau ( hors titre ) “Statuts actions”
 
-Besoins d’aides ? → [Documentation README/Markdown](https://www.makeareadme.com/)
+Besoins d’aides ? 
+
+→ [Documentation README/Markdown](https://www.makeareadme.com/)
+→ [Documentation README/Markdown](https://www.markdownguide.org/cheat-sheet/)
 
 ## Automatiser votre dépôt
 
