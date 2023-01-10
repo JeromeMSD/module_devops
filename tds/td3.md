@@ -18,20 +18,39 @@
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-360/)
 
 ```python 
-from flask import Flask, request
-from flask_restful import Resource, Api
+from flask import Flask
 
-app = Flask(__name__)
-api = Api(app)
-
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
-
-api.add_resource(HelloWorld, '/')
+@app.route("/")
+def hello_world():
+    return "Hello, World !"
 
 if __name__ == '__main__':
     app.run(debug=True)
+```
+
+## Exercice - Installer & Lancer Flask
+
+1. Vérifiez que python3 est installé
+```bash 
+python3
+```
+
+2. Installer Flask 
+```bash 
+pip install Flask
+```
+
+3. Vérifiez que Flask est installé
+```bash 
+pip freeze
+```
+
+4. Créez un fichier `àpp.py`avec en contenu le code de l'exemple de la section précédente
+5. Configurez Flask pour ouvrir ce fichier par défault et lancer Flask :
+```bash
+export FLASK_APP=app.py
+export FLASK_ENV=development
+flask run 
 ```
 
 ## Exercice - Simple API 
