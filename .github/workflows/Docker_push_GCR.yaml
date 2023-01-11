@@ -30,7 +30,9 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v3.2.0
         with:
+          # Emplacement du Dockerfile
           file: tds/correction_td3-4/Dockerfile
-          tags: gcr.io/esirem/test:0.0.1
+          tags: eu.gcr.io/esirem/test/test:0.0.1
+          # Emplacement des fichiers 
           context: tds/correction_td3-4
           push: true
