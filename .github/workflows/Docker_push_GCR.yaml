@@ -32,7 +32,7 @@ jobs:
         with:
           # Emplacement du Dockerfile
           file: tds/correction_td3-4/Dockerfile
-          tags: eu.gcr.io/esirem/test/test:0.0.1
+          tags: eu.gcr.io/esirem/test/test:${{ github.ref_name }}
           # Emplacement des fichiers 
           context: tds/correction_td3-4
           push: true
