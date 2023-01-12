@@ -4,6 +4,8 @@
 
 Voici des exemples de commande `curl` pour accéder aux différentes route dans [app.py](./app.py)
 
+### route `/dictionary`
+
 ```python
 @app.route("/dictionary", methods=['GET'])
 def get_dict():
@@ -14,6 +16,7 @@ def get_dict():
 curl -X GET http://localhost:5000/dictionary
 ```
 
+### route `/dictionary/<value>`
 
 ```python
 @app.route("/dictionary/<value>", methods=['POST'])
@@ -24,6 +27,8 @@ def add(value):
 ```bash
 curl -X POST http://localhost:5000/dictionary/valeur_de_test
 ```
+
+### route `/`
 
 ```python
 @app.route("/", methods=['GET', 'POST'])
