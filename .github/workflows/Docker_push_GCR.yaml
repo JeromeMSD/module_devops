@@ -17,7 +17,7 @@ jobs:
       - name: 'Set up Cloud Auth'
         uses: 'google-github-actions/auth@v1'
         with:
-          credentials_json: '{"type": "service_account","project_id": "esirem","private_key_id": "3203d07bd1c2bec65a74e59c5e3e7159ea5df4fa","private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDSsfLhOg+5IUde\nztnPy257tV4/Pw+nmf/Exonl55lBFZY0WFvpEty3/Qc8XHaxZ4ggEXM1DPv32z1c\n/3ybRDTc0TlPJwj5ykZ+IJhMJMz5sTQsE2cQ2lfTd9k/fr6TLnW3ZZEs+gmrVGtR\n07E+uV4J9/LXlLQmEDzWHx79aeFxSURSoIhgpHP8aU3/sH08Y7cESGkXw5Du+GaJ\ndcCJ2GWP1UAZzF7ZvZoZvzkxkPeuSdDqrfI2nwJUANOIBkmgQ6zic4iLCfm7W25x\nBSdPNnwyaqRkPD78nAWn4Kd7kpoVzIzR+C8J61GpyzEaK/EiiwFHIhdspl5R5D2y\n41cwF4stAgMBAAECggEACXiaVGmJv2axkJ93xxF7+++hNvKcv4n6p1vNYxpQF07j\nG6NFLmr8pQCozJvTchIXWmmuZhoZUYD3dzC85zXfsnVtQBOfIatoE89fSTz2Qdsn\nXzvYDDfkbssaZvJJmtAh1oaoSf9LY/o9gMYlV455nbUZo3s5xeRA99caS4Xw7mip\n2PCoNpO6CebOwan3Hip0hv+CsgEWJziFNbtD+D1Q9vLs+4ibntNEJ6mBKEBBhO2X\nXZKi2mnbldynYF69Px9VEs8+H2vkjpGu150VKTB55Lxk+GSWaPExUuBngQeH2uCR\njJMD3voRm+I//lWcOhJczSZP9V7NQ8Wj8Ik2HK5QwQKBgQDtjyt9pFWKJv1mDvhx\nqecgC/xEnubIQiPTzQ8YDZfn9dktVvvcl+1nVZE13OBMgOOQgl23wyfswoi1pKmx\nar/kjfQOM3ykPzh7F/Gtwq3OWWC/ywJe5bM90XYOa75i8cwFUPSKyuMI/9VabLV0\ncGLoL+DqGc6FcR2FvcSC0g8UOQKBgQDjDO26rsHphLUEOlhj2UIiZqdpVkvTP/nm\n1LDlAk9VFY/6kEaW0GwB2WmNsV+zPik5WsHabMyXat2t4Ayuo/+B7kdvVdAStR7U\npbnnMKC+FEcYJbDa6qBI9hIaahzI607fsUe7A5mGif6J+7R7rkgsmSgN5PBMDeJg\nhfcl4vL2lQKBgBXanuifDpN4BMW3yNlEBRQopht19ssjcoJQkfvnfDsFneYS43am\nr1tbPtGSsTu4e7bWl2KJXInmV4dGT6oXpPGUsYgA6o19l2eTi1Mt3qlmBYV/Wod6\nYCPmuhKXjNszXU575RNDmOFCD9GSwJqmoCK2DN3cY+hYwJuGGqbiRirZAoGBALIg\n+oFziX6DNuDSRXZQhKoojz79DQ/3KUAHraB9Z3ABMqwJdNftPE9XGpCnj8U4B2+P\n3HZY1UoV9UTsegapc1OkdTbLxCppHn8GZgsTA4kcr4oqR834NTgIlbtTdLHMqlyk\n4Pm/oTsEGEZ4yugdm1Ih9mKwMjX4zpmbgIKgwqzhAoGBAMIxZ6qkE4KIQI8vDN2N\nlNtohCZnoVZYl7r83FBlLcS1YPs94CAbCSUgQPt+OLMYNujVPn5i5U4hgOxiioC3\niGq9vqn5tKmPHFJSYqxnw8EMQ2ZZTbqljfSnin+supY80ElXr2/UCgyOl10qfXBI\nTgWYDlr2fz10k9DBbjsZeJCE\n-----END PRIVATE KEY-----\n","client_email": "github-ci@esirem.iam.gserviceaccount.com","client_id": "108169704751185225106","auth_uri": "https://accounts.google.com/o/oauth2/auth","token_uri": "https://oauth2.googleapis.com/token","auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs","client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/github-ci%40esirem.iam.gserviceaccount.com"}'
+          credentials_json: ${{ env.GCLOUD_KEY }}
     
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
@@ -30,7 +30,9 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v3.2.0
         with:
+          # Emplacement du Dockerfile
           file: tds/correction_td3-4/Dockerfile
-          tags: gcr.io/esirem/test:0.0.1
+          tags: eu.gcr.io/esirem/test/test:${{ github.ref_name }}
+          # Emplacement des fichiers 
           context: tds/correction_td3-4
           push: true
