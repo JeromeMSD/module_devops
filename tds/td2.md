@@ -57,3 +57,7 @@ Implémenter et tester dans le dossier `./github/workflows/` :
 ### Tips
 - Utilisez l’éditeur d’action dans GitHub.
 - Aidez-vous du marketplace Github Action à droite de l’éditeur dans GitHub.
+
+### Validation
+
+Pour finir, utiliser les **issues** GitHub pour me communiquer que vous avez terminé ce TPs en créer une issue de type `documentation` sur ce dépôt [JeromeMSD/module_ci-cd](https://github.com/JeromeMSD/module_ci-cd).
