@@ -12,7 +12,7 @@ Le but est de vous faire collaborer dans la réalisation de ce TD et des suivant
 
 > Pour commencer à collaborer, il nous faut un dépôt !
 
-Créez un nouveau dépôt **publique** sur le GitHub d’un des membres du binôme :
+Créez un nouveau dépôt **privé** sur le GitHub d’un des membres du binôme :
 
 1. L’heure du choix le plus difficile, celui du nom ! Choisissez un nom pour votre dépôt, soyez créatif ce dépôt va accueillir le projet !
 ( pas de panique, vous pourrez changer le nom plus tard si vous en ressentez le besoin dans les paramètres du dépôt ). Ce nom doit être spécifié en snake_case et devra être préfixé avec `4A_[ ILC ou SQR ]_`
