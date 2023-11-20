@@ -4,7 +4,7 @@ Le projet noté du module de CI/CD évaluera compétences et bonnes pratiques de
 
 Il n'y a pas de rapport, le (ou les) `README.md`  de votre dépôt remplira cette fonction, soignez leur rédaction et faites qu'ils soient le plus complet possible.
 
-## Bon courage 🚀
+**Bon courage 🚀**
 
 ___
 
@@ -38,6 +38,7 @@ ___
 ## Sujet
 
 **Créer une API Flask pour de la gestion CRUD d’un calendrier.**
+
 Langage : `Python`
 
 Définissons un évènement comme étant un tuplet *(T1, t, p, n)*, où **t** est égal au temps de l'évènement en seconde à partir du **timestamp T1** (date et heure du début de l'évènement) et **p** la liste des personnes participant à cet évènement. **n** sera le nom de l'évènement.
@@ -47,7 +48,7 @@ Définissons un évènement comme étant un tuplet *(T1, t, p, n)*, où **t** es
 ### Réaliser une première version de l’API REST
 
 En utilisant *Flask*, réaliser une première version de l’API.
-Voici une liste des actions (aussi appelées routes) qui doivent être mises à la disposition via un appel HTTP sur API:
+Voici une liste des actions (aussi appelées *routes* ou *endpoints*) qui doivent être mises à la disposition via un appel HTTP sur API:
 
 * E1 - Créer un évènement.
 * E2 - Afficher une liste de tous les événements dans l’ordre chronologique.
@@ -92,7 +93,7 @@ ___
 
 ## Top départ
 
-Déployez \textbf{une première release publique} de l’API via GitHub avec un tag correspondant à la bonne version sémantique.
+Déployez **une première release publique** de l’API via GitHub avec un tag correspondant à la bonne version sémantique.
 
 ### Améliorer l’API
 
