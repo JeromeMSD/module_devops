@@ -38,6 +38,7 @@ ___
 ## Sujet
 
 **Créer une API Flask pour de la gestion CRUD d’un calendrier.**
+
 Langage : `Python`
 
 Définissons un évènement comme étant un tuplet *(T1, t, p, n)*, où **t** est égal au temps de l'évènement en seconde à partir du **timestamp T1** (date et heure du début de l'évènement) et **p** la liste des personnes participant à cet évènement. **n** sera le nom de l'évènement.
@@ -92,7 +93,7 @@ ___
 
 ## Top départ
 
-Déployez \textbf{une première release publique} de l’API via GitHub avec un tag correspondant à la bonne version sémantique.
+Déployez **une première release publique** de l’API via GitHub avec un tag correspondant à la bonne version sémantique.
 
 ### Améliorer l’API
 
