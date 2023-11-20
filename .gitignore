@@ -1,4 +1,4 @@
 __pycache__
-projets/*
+# projets/*
 tds/correction_td3-4/*
-.github/*
+# .github/*
