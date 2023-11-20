@@ -48,7 +48,7 @@ Définissons un évènement comme étant un tuplet *(T1, t, p, n)*, où **t** es
 ### Réaliser une première version de l’API REST
 
 En utilisant *Flask*, réaliser une première version de l’API.
-Voici une liste des actions (aussi appelées routes) qui doivent être mises à la disposition via un appel HTTP sur API:
+Voici une liste des actions (aussi appelées *routes* ou *endpoints*) qui doivent être mises à la disposition via un appel HTTP sur API:
 
 * E1 - Créer un évènement.
 * E2 - Afficher une liste de tous les événements dans l’ordre chronologique.
