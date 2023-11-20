@@ -4,7 +4,7 @@ Le projet noté du module de CI/CD évaluera compétences et bonnes pratiques de
 
 Il n'y a pas de rapport, le (ou les) `README.md`  de votre dépôt remplira cette fonction, soignez leur rédaction et faites qu'ils soient le plus complet possible.
 
-## Bon courage 🚀
+**Bon courage 🚀**
 
 ___
 
