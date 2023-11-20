@@ -22,7 +22,7 @@ jobs:
           project_id: esirem
 
       - name: Configure Docker using GCLOUD
-        run: gcloud auth configure-docker
+        run: gcloud auth configure-docker europe-west1-docker.pkg.dev
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v3.2.0
