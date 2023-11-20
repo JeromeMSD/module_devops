@@ -28,8 +28,8 @@ jobs:
         uses: docker/build-push-action@v3.3.1
         with:
           # Emplacement du Dockerfile
-          file: tds/correction_td3-4/Dockerfile
+          file: tds/corrections/Dockerfile
           tags: europe-west1-docker.pkg.dev/esirem/esirem/test:${{ github.ref_name }}
           # Emplacement des fichiers 
-          context: tds/correction_td3-4
+          context: tds/corrections
           push: true
