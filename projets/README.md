@@ -83,7 +83,7 @@ JeromeMSD/module_ci-cd/.github/workflows/Docker_push_GCR.yaml
 Modifiez le paramètre **tags** de l'étape "Build and push Docker images" pour y mettre la valeur :
 
 ```md
-gcr.io/esirem/4A_[ilc_ou_sqr]/[nom1_nom2]/[nom_du_projet]:${{ github.ref_name }}
+europe-west1-docker.pkg.dev/esirem/esirem/4A_[ilc_ou_sqr]/[nom1_nom2]/[nom_du_projet]:${{ github.ref_name }}
 ```
 
 Modifiez les paramètres **file** et **context** de l'étape "Build and push Docker images" et remplacez les éléments entre crochets dans l'URL pour y mettre les bonnes valeurs suivant votre projet.
