@@ -54,7 +54,7 @@ Voici une liste des actions (aussi appelées *routes* ou *endpoints*) qui doiven
 * E2 - Afficher une liste de tous les événements dans l’ordre chronologique.
 * E3 - Afficher une liste de tous les évènements dans l’ordre chronologique liées à une personne.
 * E4 - Ajouter un participant à un évènement.
-* E5 - Afficher le détails du prochain cours.
+* E5 - Afficher le détails du prochain évènement.
 * E6 - Importer des données depuis un fichier csv. (à documenter)
 
 ### Documenter l’API via des READMEs et un fichier Swagger
