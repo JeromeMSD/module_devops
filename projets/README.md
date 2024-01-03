@@ -97,7 +97,7 @@ Déployez **une première release publique** de l’API via GitHub avec un tag c
 
 ### Améliorer l’API
 
-\noindent Pour chacune des fonctionnalités suivantes, faites une release de votre API avec le numéro de version adapté.
+Pour chacune des fonctionnalités suivantes, faites une release de votre API avec le numéro de version adapté.
 
 Ajoutez maintenant une **description** aux évènements dans le modèle: *(T1, t, p, n, d)*, où **d** est une courte description de l'évènement. Les endpoints de lectures doivent prendre en compte ce changement.
 
