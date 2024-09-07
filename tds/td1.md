@@ -10,30 +10,25 @@ Si vous êtes ici c'est que vous venez avez un compte GitHub.
 
 Jouons avec l'outil `git`
 
-#### Enoncé
+Rendez-vous sur [https://learngitbranching.js.org/](ttps://learngitbranching.js.org/). En suivant les instructions de chaque exercice, complétez chacun des niveaux.
 
-Rendez-vous sur https://learngitbranching.js.org/
-
-En suivant les instructions de chaque exercice, complétez chacun des niveaux.
-
-<center><b>Appelez-moi pour valider la complétion.</b></center>
+> [!IMPORTANT]
+> Appelez-moi pour valider la complétion.
 
 #### Questions
 
-Vous avez terminés les exercices ?
-
-Bien joué ! mais pouvez-vous répondre à ces trois questions.
+Vous avez terminés les exercices ? **Bien joué !** mais pouvez-vous répondre à ces trois questions.
 
 1. Quelle est la différence entre `git reset HEAD^1` et `git revert [last_commit]` ?
 2. A quoi sert `git fetch` ?
 3. Que font les commandes suivantes ?
-
     ```sh
     git checkout main
     git rebase bugFix
     ```
 
-### Documentation
+---
 
+**Documentations**
 * Git : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git
 * GitHub : https://github.com
