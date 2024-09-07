@@ -18,9 +18,9 @@ Tous les travaux dirigés sont également disponibles sur le drive et dans [le d
 
 [TD n°2](./tds/td2.md) : GitHub Action, Issue & Pull Request.
 
-[TD n°3](./tds/td3.md) : Manipulation de conteneur avec Docker.
+[TD n°3](./tds/td3.md) : _WIP_
 
-[TD n°4](./tds/td4.md) : Le deploiement continu.
+[TD n°4](./tds/td4.md) : _WIP_
 
 [TD n°5 et 6](./projets/README.md) : **PROJET**.
 
