@@ -61,11 +61,17 @@ Implémenter et tester dans le dossier `./github/workflows/` :
 
 Créer une **PR** pour proposer un changement dans les GitHub Actions.
 
+>[!important]
+> Ajoutez-moi à cette PR en tant qu'`Assignee`.
+
 ### Validation
 
 Pour finir, utiliser les **issues** GitHub pour **me communiquer** que vous avez terminé ce TPs en créer une issue de type `documentation` sur votre dépôt.
 
 Vous y coller dans un bloc de code le resultat de l'action "Moon".
+
+>[!important]
+> Ajoutez-moi à cette issues en tant qu'`Reviewer`.
 
 
 
