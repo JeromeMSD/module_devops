@@ -12,7 +12,7 @@ Le but est de vous faire collaborer dans la réalisation de ce TD et des suivant
 
 ---
 
-## 1. Poser les bases du projet.
+## Poser les bases du projet.
 
 > Pour commencer à collaborer, il nous faut un dépôt !
 
@@ -23,7 +23,7 @@ Pas de panique, vous pourrez changer le nom plus tard si vous en ressentez le be
 2. Ajoutez le second membre du binôme en tant que collaborateur.
 3. Ajoutez-moi en tant que collaborateur. `jerome.massard@kiowy.com`
 
-## 2. Documenter le dépôt
+## Documenter le dépôt
 
 Maintenant, initions les bonnes pratiques :
 
@@ -41,7 +41,7 @@ Maintenant, initions les bonnes pratiques :
 > * [Documentation README/Markdown](https://www.makeareadme.com/)
 > * [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
 
-## 3. Automatiser votre dépôt
+## Automatiser votre dépôt
 
 Implémenter et tester dans le dossier `./github/workflows/` :
 
@@ -59,14 +59,14 @@ Implémenter et tester dans le dossier `./github/workflows/` :
 > Utilisez l’éditeur d’action dans GitHub.
 > Aidez-vous du marketplace Github Action à droite de l’éditeur dans GitHub.
 
-## 4. Proposition
+## Proposition
 
 Créer une **PR** pour proposer un changement dans les GitHub Actions.
 
 >[!important]
 > Ajoutez-moi à cette PR en tant qu'`Assignee`.
 
-## 5. Validation
+## Validation
 
 Pour finir, utiliser les **issues** GitHub pour **me communiquer** que vous avez terminé ce TPs en créer une issue de type `documentation` sur votre dépôt.
 
