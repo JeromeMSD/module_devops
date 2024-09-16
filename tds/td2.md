@@ -71,7 +71,7 @@ Pour finir, utiliser les **issues** GitHub pour **me communiquer** que vous avez
 Vous y coller dans un bloc de code le resultat de l'action "Moon".
 
 >[!important]
-> Ajoutez-moi à cette issues en tant qu'`Reviewer`.
+> Ajoutez-moi à cette issues en tant que `Reviewer`.
 
 
 
