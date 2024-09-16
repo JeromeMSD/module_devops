@@ -43,7 +43,7 @@ Maintenant, initions les bonnes pratiques :
 
 ## Automatiser votre dépôt
 
-Implémenter et tester dans le dossier `./github/workflows/` :
+Implémenter et tester dans le dossier `.github/workflows/` :
 
 * Une action "Automated" qui se déclenche à **chaque push** pour exécuter echo "New push !".
 * Une action "Moon" qui se déclenche **sur commande manuel** pour exécuter une commande curl sur l’adresse `wttr.in/Moon` via une Action du marketplace.
