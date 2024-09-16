@@ -10,7 +10,9 @@ Dans ce TD, vous allez apprendre à manipuler une dépôt de code source avec l'
 
 Le but est de vous faire collaborer dans la réalisation de ce TD et des suivants. L’équité des modifications sur le dépôt font partie de la note.
 
-## Poser les bases du projet.
+---
+
+## 1. Poser les bases du projet.
 
 > Pour commencer à collaborer, il nous faut un dépôt !
 
@@ -21,7 +23,7 @@ Pas de panique, vous pourrez changer le nom plus tard si vous en ressentez le be
 2. Ajoutez le second membre du binôme en tant que collaborateur.
 3. Ajoutez-moi en tant que collaborateur. `jerome.massard@kiowy.com`
 
-## Documenter le dépôt
+## 2. Documenter le dépôt
 
 Maintenant, initions les bonnes pratiques :
 
@@ -39,7 +41,7 @@ Maintenant, initions les bonnes pratiques :
 > * [Documentation README/Markdown](https://www.makeareadme.com/)
 > * [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
 
-## Automatiser votre dépôt
+## 3. Automatiser votre dépôt
 
 Implémenter et tester dans le dossier `./github/workflows/` :
 
@@ -57,14 +59,14 @@ Implémenter et tester dans le dossier `./github/workflows/` :
 > Utilisez l’éditeur d’action dans GitHub.
 > Aidez-vous du marketplace Github Action à droite de l’éditeur dans GitHub.
 
-### Proposition
+## 4. Proposition
 
 Créer une **PR** pour proposer un changement dans les GitHub Actions.
 
 >[!important]
 > Ajoutez-moi à cette PR en tant qu'`Assignee`.
 
-### Validation
+## 5. Validation
 
 Pour finir, utiliser les **issues** GitHub pour **me communiquer** que vous avez terminé ce TPs en créer une issue de type `documentation` sur votre dépôt.
 
