@@ -8,7 +8,5 @@ Il n'y a pas de rapport, le (ou les) `README.md`  de votre dépôt remplira cett
 
 ___
 
-## Exigences générales projet
-
 > [!note]
 > Sujet en cours de construction.
