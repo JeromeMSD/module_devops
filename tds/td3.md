@@ -1,7 +1,87 @@
 # TD n°3 - Conteneurisation ++
 
-> [!warning]
-> En cours de construction
+Les notions abordées durant ce TD seront liées à `docker-compose` et à la sécurité des conteneurs.
+
+## docker-compose
+
+Nous allons utiliser `docker-compose` pour unifié le déploiement d'une ensemble de conteneur sur votre machine.
+
+Nous reprendrons les images exécutées dans le projet de Virtualisation et Cloud Computing pour déployer localement et en une commande l'architecture suivante :
+
+```mermaid
+graph LR
+    F["Frontend
+        API_URL='localhost:5000'"] --> B["API
+                                        REDIS_URL='localhost'
+                                        REDIS_PORT='6379'"]
+    B --> R[(Redis DB)]
+```
+
+### Mise en place
+
+Voici un template de fichier `compose.yaml` utilisé par la commande `docker compose up` :
+
+```yaml
+services:
+  frontend:
+    image: <image>
+    ports:
+      - "<port-hote>:<port-ctn>"
+    environment:
+      - <key>=<value>
+    network:
+      - myapp-network
+
+  backend:
+    <to-do-for-backend>
+  <other-services>
+networks:
+  # La présence de la ligne suivante suffit pour demander la création du réseau.
+  myapp-network: {}
+```
+
+A partir du template ci-dessus et [de la documentation](https://docs.docker.com/compose/intro/compose-application-model/) :
+
+1. Dans un dossier `td-conteneurisation`, créer un fichier `compose.yaml`.
+2. Définissez, pour chaque conteneur de l'architecture, un Service dans le tableau `services`.
+3. Validez le l'architecture en la démarrant localement avec la commande:
+
+   ```shell
+   docker compose up
+   ```
+
+   > [!note]
+   > Vous pouvez arrêter les différents conteneurs en une commande :
+   >
+   > ```shell
+   > docker compose down
+   > ```
+
+> [!note]
+> Le réseau virtuel `myapp-network`, dans lequel vont s'incrire ces conteneurs, n'a pas besoin paramètre supplémentaire.
+
+### Du build au déploiement
+
+`docker-compose` permet également d'unifié le dévelopement des différents tiers de l'application.
+
+1. Dans le dossier `td-conteneurisation`, créer un dossier `frontend` et `backend`.
+2. Ajouter le code et le Dockerfile du `frontend` et de l'API du projet Virtualization Cloud Computing dans ces dossiers.
+3. Dans chacun des services définis dans le fichier `compose.yaml`, ajouter l'argument `build` qui permet de definir où se trouvent les fichiers sources des différentes services de la composition.
+
+    ```yaml
+        # ...
+        frontend:
+        build:
+            context: ./frontend/                      # Dossier d'exécution du `docker build`
+            dockerfile: frontend/Dockerfile           # Dockerfile à utiliser pour l'exécution du `docker build`
+        # ...
+    ```
+
+4. Contruiser tous les conteneurs en une seule fois en utilisant la commande :
+
+    ```shell
+        docker compose build
+    ```
 
 ## Sécurité des conteneurs
 
@@ -80,9 +160,7 @@ Nous allons commencer par tester la configuration par défaut de Falco.
 > Curieux de savoir quelle était cette règle qui a été enfreinte ? Sa description est [ici](https://github.com/falcosecurity/rules/blob/c0a9bf17d5451340ab8a497efae1b8a8bd95adcb/rules/falco_rules.yaml#L398).
 
 
-
-
-Now it's time to create our own rule and load it into Falco. We can be pretty creative with them, but let's stick with something simple. This time, we want to be alerted when any file is opened for writing in the /etc directory, either on the host or inside containers.
+Vous allez maintenant créer votre propre règle et l'ajouter au catalogue de surveillance de Falco.
 
 1. Créer un fichier `my-falco-rule.yaml` à partir du contenu suivant :
 
