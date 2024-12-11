@@ -16,6 +16,15 @@ graph LR
                                         REDIS_PORT='6379'"]
     B --> R[(Redis DB)]
 ```
+Rappel: 
+- L'image du frontend devrait ressembler à ça: `europe-west1-docker.pkg.dev/polytech-dijon/polytech-dijon/frontend-2024:nom1-nom2` (le conteneur exposera le port `8080`).
+- l'image de l'API devrait ressembler à ça: `europe-west1-docker.pkg.dev/polytech-dijon/polytech-dijon/backend-2024:nom1-nom2` (le conteneur exposera le port `5000`).
+- Pour **Redis** utiliser: `redis` (le conteneur exposera le port `6379`).
+
+> [!important]
+> **Impossible de télécharger les images ?** Réauthentifiez vous avec la commande `gcloud auth login` et `gcloud auth configure-docker europe-west1-docker.pkg.dev`.
+>
+> **Toujours rien ?** Faites moi signe 👋
 
 ### Mise en place
 
@@ -40,16 +49,17 @@ networks:
   myapp-network: {}
 ```
 
-A partir du template ci-dessus et [de la documentation](https://docs.docker.com/compose/intro/compose-application-model/) :
+À partir du template ci-dessus et [de la documentation](https://docs.docker.com/compose/intro/compose-application-model/) :
 
 1. Dans un dossier `td-conteneurisation`, créer un fichier `compose.yaml`.
-2. Définissez, pour chaque conteneur de l'architecture, un Service dans le tableau `services`.
+2. Définissez, pour chaque conteneur de l'architecture, un service dans le tableau `services`.
 3. Validez le l'architecture en la démarrant localement avec la commande:
 
    ```shell
    docker compose up
    ```
    > Vous pouvez arrêter les différents conteneurs en une commande : `docker compose down`
+4. Rendez-vous sur http://localhost:8080 👈
 
 > [!note]
 > Le réseau virtuel `myapp-network`, dans lequel vont s'incrire ces conteneurs, n'a pas besoin paramètre supplémentaire.
@@ -59,8 +69,8 @@ A partir du template ci-dessus et [de la documentation](https://docs.docker.com/
 `docker-compose` permet également d'unifié le dévelopement des différents tiers de l'application.
 
 1. Dans le dossier `td-conteneurisation`, créer un dossier `frontend` et `backend`.
-2. Ajouter le code et le Dockerfile du `frontend` et de l'API du projet Virtualization Cloud Computing dans ces dossiers.
-3. Dans chacun des services définis dans le fichier `compose.yaml`, ajouter l'argument `build` qui permet de definir où se trouvent les fichiers sources des différentes services de la composition.
+2. Ajouter les codes et les Dockerfile du `frontend` et de l'API du projet Virtualization Cloud Computing dans ces dossiers.
+3. Pour chacun des services définis dans le fichier `compose.yaml`, ajouter l'argument `build` qui permet de definir où se trouvent les fichiers sources des différents services de la composition.
 
     ```yaml
         # ...
@@ -85,7 +95,7 @@ A partir du template ci-dessus et [de la documentation](https://docs.docker.com/
 
 En vous basant sur [la documentation de l'outil](https://trivy.dev/v0.57/getting-started/installation/), installer l'outil en suivant les étapes recommandées pour votre système.
 
-Tryvi s'utilise sur des configurations (Kubernetes, Terraform, etc) et des images en suivant le format de commande suivant:
+Trivy s'utilise sur des configurations (Kubernetes, Terraform, etc) et des images en suivant le format de commande suivant:
 
 ```bash
 trivy <target> [--scanners <scanner1,scanner2>] <subject>
@@ -101,7 +111,7 @@ trivy image python:3.4-alpine
 
 Nous allons maintenant scanner les images construites dans la parties précédentes.
 
-1. Construiser les images de conteneur `frontend` et `backend` à partir des procédures précédentes et scanner ces images.
+1. Construiser les images de conteneur `frontend` et `backend` à partir de leur Dockerfile et scanner ces images.
 2. Résolver les vulnérabilités identifiées par `trivy`.
 3. Reconstruiser et rescanner vos images, si des vulnérabilités sont listées, reprennez **à l'étape 2**.
 
@@ -161,12 +171,12 @@ Vous allez maintenant créer votre propre règle et l'ajouter au catalogue de su
 ```yaml
 customRules:
   custom-rules.yaml: |-
-    - rule: Write below etc
-      desc: An attempt to write to /etc directory
+    - rule: Prevent exams
+      desc: An attempt to create a exam.pdf file.
       condition: >
         (evt.type in (open,openat,openat2) and evt.is_open_write=true and fd.typechar='f' and fd.num>=0)
-        and fd.name startswith /etc
-      output: "File below /etc opened for writing (file=%fd.name pcmdline=%proc.pcmdline gparent=%proc.aname[2] ggparent=%proc.aname[3] gggparent=%proc.aname[4] evt_type=%evt.type user=%user.name user_uid=%user.uid user_loginuid=%user.loginuid process=%proc.name proc_exepath=%proc.exepath parent=%proc.pname command=%proc.cmdline terminal=%proc.tty %container.info)"
+        and fd.name contains exam.pdf
+      output: "File that look like an exam opened for writing (file=%fd.name pcmdline=%proc.pcmdline gparent=%proc.aname[2] ggparent=%proc.aname[3] gggparent=%proc.aname[4] evt_type=%evt.type user=%user.name user_uid=%user.uid user_loginuid=%user.loginuid process=%proc.name proc_exepath=%proc.exepath parent=%proc.pname command=%proc.cmdline terminal=%proc.tty %container.info)"
       priority: WARNING
       tags: [filesystem, mitre_persistence]    
 ```
@@ -189,7 +199,7 @@ customRules:
 4. Tester votre règle.
 
     ```shell
-    kubectl exec -it $(kubectl get pods --selector=app=nginx -o name) -- touch /etc/test_file_for_falco_rule
+    kubectl exec -it $(kubectl get ns -o name) -- touch /etc/exam.pdf
     ```
 
     ```shell
