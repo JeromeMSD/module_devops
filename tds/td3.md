@@ -49,13 +49,7 @@ A partir du template ci-dessus et [de la documentation](https://docs.docker.com/
    ```shell
    docker compose up
    ```
-
-   > [!note]
-   > Vous pouvez arrêter les différents conteneurs en une commande :
-   >
-   > ```shell
-   > docker compose down
-   > ```
+   > Vous pouvez arrêter les différents conteneurs en une commande : `docker compose down`
 
 > [!note]
 > Le réseau virtuel `myapp-network`, dans lequel vont s'incrire ces conteneurs, n'a pas besoin paramètre supplémentaire.
@@ -71,7 +65,7 @@ A partir du template ci-dessus et [de la documentation](https://docs.docker.com/
     ```yaml
         # ...
         frontend:
-        build:
+          build:
             context: ./frontend/                      # Dossier d'exécution du `docker build`
             dockerfile: frontend/Dockerfile           # Dockerfile à utiliser pour l'exécution du `docker build`
         # ...
