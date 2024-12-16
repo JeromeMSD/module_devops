@@ -18,7 +18,7 @@ Tous les travaux dirigés sont également disponibles sur le drive et dans [le d
 
 [TD n°2](./tds/td2.md) : GitHub Action, Issue & Pull Request.
 
-[TD n°3](./tds/td3.md) : Conteneurisation++
+[TD n°3](./tds/td3.md) : Conteneurisation ++
 
 [TD n°4](./tds/td4.md) : Test Driven Development
 
