@@ -8,7 +8,7 @@ Nous allons commencer par un developpement d'une fonction python en deux itérat
 
 ### 0. Prérequis
 
-Si il n'est pas déjà installé, installer `python3`:
+Si il n'est pas déjà installé, installer `python3` dans votre environment Linux (`VM` ou `WSL`):
 
 ```shell
 apt-get install python3
@@ -21,7 +21,7 @@ Python 3.11.6
 pip 23.2.1 from ... (python 3.11)
 ```
 
-Ensuite, installer `pytest`:
+Ensuite, installer la bibliothèque `pytest`:
 
 ```shell
 pip3 install pytest
@@ -34,7 +34,7 @@ Créer les fichiers `main.py` et `test.py` qui contiendront respectivement les f
 
 ### 1. Ecrire un test
 
-Commençons par quelque chose de simple et basique, une fonction qui renvoie `Hello World`. Le test correspondant se représenterai comme suit:
+Commençons par quelque chose de simple et basique, une fonction qui renvoie `Hello World !`. Le test correspondant se représenterait comme suit:
 
 ```python
 import main
@@ -43,7 +43,8 @@ def test_hello():
     assert main.hello() == "Hello World !"
 ```
 
-Le test défini si dessus est **valide** si l'assertion suivante est vraie: **Le retour de la fonction `hello()` de `main` est une chaine de caractère contenant `Hello World !`.**
+Le test défini ci-dessus est **valide** si l'assertion suivante est vraie: 
+> **Le retour de la fonction `hello()` de `main` est une chaine de caractères contenant `Hello World !`.**
 
 Ajouter le code ci-dessus dans le fichier `test.py` et exécuter ce test avec la commande `pytest`.
 
@@ -51,7 +52,7 @@ Ajouter le code ci-dessus dans le fichier `test.py` et exécuter ce test avec la
 pytest test.py
 ```
 
-Vous avez maintenant l'objectif que vous voulez atteindre. 🚀
+Vous avez maintenant l'objectif que vous voulez atteindre avec la fonction. 🚀
 
 ### 2. Coder
 
@@ -72,20 +73,20 @@ Tester la fonction `hello()`.
 pytest test.py
 ```
 
-> [!tips]
+> [!tip]
 > **Le test passe au vert** - Vous pouvez passer à la suite.
 
 > [!caution]
-> **Le test passe au rouge** - Reprenez à l'**étape 2**.
+> **Le test reste au rouge** - Reprenez à l'**étape 2**.
 
 ### 4. Refactoriser
 
-La fonction répond à l'objectif fixé à l'étape 1.
+À partir d'ici, la fonction répond à l'objectif fixé à l'étape 1.
 
 L'étape de **refactorisation** va permettre d'assurer qualité et respect des bonnes pratiques dans le code livré, refactoriser la fonction `hello()` dans le fichier `main.py`.
 
 > [!note]
-> N'oublier pas: **Refactoriser** c'est améliorer, simplifier et optimiser le code d'une fonction pour le rendre plus pertinent. Par exemple, en rendant une fonction plus modulaire.
+> N'oubliez pas: **Refactoriser** c'est améliorer, simplifier et optimiser le code d'une fonction pour le rendre plus pertinent. Par exemple, en rendant une fonction plus modulaire.
 
 ```python
 def hello(msg="Hello world!"):
@@ -94,17 +95,19 @@ def hello(msg="Hello world!"):
 
 ### 5. Confirmer
 
-Exécuter à nouveau les tests pour confirmer te la refactorisation n'a pas d'impact.
+Exécuter à nouveau les tests pour confirmer que la refactorisation n'a pas d'impact.
 
 ```shell
 pytest test.py
 ```
 
-> [!tips]
-> **Le test reste est vert** - Félicitation, la fonctionnalité est complète grâce à la méthode **Red-Green-Refactor** 🚀
+> [!tip]
+> **Le test reste est vert** - Félicitation, la fonctionnalité est complète grâce à votre implémentation de la méthode **Red-Green-Refactor** 🚀
 
 > [!caution]
-> **Le test passe au rouge** - Une erreur c'est inserer dans le code, recommencer l'itération.
+> **Le test passe au rouge** - Une erreur c'est inserée dans le code, recommencer l'itération **4. Refactoriser**.
+
+---
 
 ## Mise à l'échelle
 
@@ -112,13 +115,13 @@ Nous allons maintenant mettre à l'échelle la méthodologie.
 
 ### Integration continue
 
-Créer une GitHub Action qui permet, pour chaque push, d'exécuter les tests via `pytest`.
+Créer une [GitHub Action](./td2.md) qui permet, pour chaque push, d'exécuter les tests via `pytest`.
 
 ### Le calendrier
 
 Réaliser une suite de fonction pour créer et gérer des évènements.
 
-Définissons un évènement comme étant un tuplet (`T1`, `t`, `n`), où `t` est égal au temps de l’évènement en seconde à partir du timestamp `T1` (date et heure du début de l’évènement). `n` sera le nom de l’évènement.
+Définissons un évènement comme étant un tuple (`T1`, `t`, `n`), où `t` est égal au temps de l’évènement en seconde à partir du timestamp `T1` (date et heure du début de l’évènement). `n` sera le nom de l’évènement.
 
 0. Les évènements sont stockés dans un tableau.
 1. Créer un évènement.
@@ -134,7 +137,7 @@ Définissons un évènement comme étant un tuplet (`T1`, `t`, `n`), où `t` est
 > * Un troisième commit dont le message suivra le format `refactor: nom_de_la_fonction()`, contenant le code de la fonction à développer.
 
 > [!tip]
-> Pour les phases de **code** et de **refactorisation**, vous pouvez tester localement avec `pytest`, et pousser lors du premier passage au vert et au terme de la refactorisation.
+> Pour les phases de **code** et de **refactorisation**, vous pouvez tester localement avec `pytest`, et pousser uniquement lors du premier passage au vert et au terme de la refactorisation.
 
 ### Bonus - APIfication (facultatif)
 
@@ -152,7 +155,7 @@ def hello_world():
     return "<p>Hello, World!</p>"
 ```
 
-Placer chacunes de vos fonctions sous une route. (ex: `@app.route("/list")`).
+Placer chacunes de vos fonctions sous une route différente. (ex: `@app.route("/list")`).
 
 ```shell
 python main.py
