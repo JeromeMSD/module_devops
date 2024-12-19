@@ -126,6 +126,8 @@ Scanner l'ensemble des fichiers du dossier de votre dépôt en local avec `trivy
 
 Trivy dispose d'une GitHub Action ! Via les informations de [ce dépôt](https://github.com/aquasecurity/trivy-action) et le Market Place des GitHub Action. Mettez en place sur votre dépôt une GitHub Action qui scan les images issues de vos Dockerfiles.
 
+---
+
 ### Falco
 
 [Falco](https://falco.org/) est un outil de sécurité Cloud Natif qui assure la sécurité à l'exécution des machines hôtes, des conteneurs, de Kubernetes, des environnements Cloud. C'est un outil actif qui surveille l'environnement dans lequel il est déployé en temps réel.
