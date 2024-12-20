@@ -206,7 +206,7 @@ customRules:
 5. Tester votre règle.
 
     ```shell
-    kubectl exec -it $(kubectl get ns -o name) -- touch /etc/exam.pdf
+    kubectl exec -it $(kubectl get po -o name) -- touch /etc/exam.pdf
     ```
 
     ```shell
