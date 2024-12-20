@@ -150,9 +150,8 @@ Nous allons commencer par tester la configuration par défaut de Falco.
     ```shell
     kubectl exec -it $(kubectl get pods --selector=app=nginx -o name) -- cat /etc/shadow
     ```
-
-    > [!info]
-    > Cette commande tente d'afficher le contenu du fichier `shadow` stocker dans le dossier `/etc/` du conteneur exécuté (dossier administrateur).
+> [!info]
+> Cette commande tente d'afficher le contenu du fichier `shadow` stocker dans le dossier `/etc/` du conteneur exécuté (dossier administrateur).
 
 4. Que pouvez-vous observé dans les logs de Falco ? (affichage des evenements de type `Warning`)
 
@@ -184,21 +183,27 @@ customRules:
 ```
 
 2. Charger la règle dans l'instance de Falco en exécution dans le cluster.
+> [!important]
+> Installer le dépôt de falco avant d'executer la suite.
+> ```shell
+>  helm repo add falcosecurity https://falcosecurity.github.io/charts
+>  helm repo update
+> ```
 
     ```shell
     helm upgrade --namespace falco falco falcosecurity/falco --set tty=true -f falco_custom_rules_cm.yaml
     ```
 
-    > [!note]
-    > `helm` est un outil pour faciliter la manipulation de manifest `yaml`. [Installer HELM](https://helm.sh/fr/docs/intro/install/)
+> [!note]
+> `helm` est un outil pour faciliter la manipulation de manifest `yaml`. [Installer HELM](https://helm.sh/fr/docs/intro/install/)
 
-3. Attendez que l'instance de Falco est redémarré avec la nouvelle règle.
+4. Attendez que l'instance de Falco est redémarré avec la nouvelle règle.
 
     ```shell
     kubectl wait pods --for=condition=Ready --all -n falco
     ```
 
-4. Tester votre règle.
+5. Tester votre règle.
 
     ```shell
     kubectl exec -it $(kubectl get ns -o name) -- touch /etc/exam.pdf
