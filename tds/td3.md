@@ -38,7 +38,7 @@ services:
       - "<port-hote>:<port-ctn>"
     environment:
       - <key>=<value>
-    network:
+    networks:
       - myapp-network
 
   backend:
