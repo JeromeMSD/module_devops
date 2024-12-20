@@ -183,16 +183,16 @@ customRules:
 ```
 
 2. Charger la règle dans l'instance de Falco en exécution dans le cluster.
+   
+    ```shell
+    helm upgrade --namespace falco falco falcosecurity/falco --set tty=true -f falco_custom_rules_cm.yaml
+    ```
 > [!important]
 > Installer le dépôt de falco avant d'executer la suite.
 > ```shell
 >  helm repo add falcosecurity https://falcosecurity.github.io/charts
 >  helm repo update
 > ```
-
-    ```shell
-    helm upgrade --namespace falco falco falcosecurity/falco --set tty=true -f falco_custom_rules_cm.yaml
-    ```
 
 > [!note]
 > `helm` est un outil pour faciliter la manipulation de manifest `yaml`. [Installer HELM](https://helm.sh/fr/docs/intro/install/)
