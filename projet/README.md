@@ -13,6 +13,8 @@ ___
 > [!note]
 > WIP
 
+Retrouver tous les détails concernant applicatif ce projet dans le fichier [./sujet.md](./sujet.md)
+
 ## Exigences du projet
 
 Pour réaliser le projet vous disposer des deux dernières séances de TDs et du projet GitHub suivant: https://github.com/JeromeMSD/projet_devops-ilia-2024-5. Ce dépôt GitHub sera commun à l'ensemble des ILIA.
