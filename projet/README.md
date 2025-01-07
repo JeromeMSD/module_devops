@@ -13,7 +13,7 @@ ___
 > [!note]
 > WIP
 
-Retrouver tous les détails concernant applicatif ce projet dans le fichier [./sujet.md](./sujet.md)
+Retrouver tous les détails concernant ce projet dans le fichier [./sujet.md](./sujet.md)
 
 ## Exigences du projet
 
