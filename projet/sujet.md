@@ -97,9 +97,3 @@ Une base contenant les utilisateurs dans laquelle la clé sera le nom d’utilis
 *Exemple :* `key=username, value=[timestamp_1, timestamp_2, timestamp_3]`
 
 L'architecture ci-dessus est un exemple. Vous êtes libre de choisir une autre architecture, mais elle doit fonctionner 😉
-
----
-
-## Base choisie lors du CM3
-
-> TO DO
