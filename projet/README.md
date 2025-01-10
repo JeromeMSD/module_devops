@@ -10,9 +10,6 @@ ___
 
 ## Sujet 
 
-> [!note]
-> WIP
-
 Retrouver tous les détails concernant ce projet dans le fichier [./sujet.md](./sujet.md)
 
 ## Exigences du projet
