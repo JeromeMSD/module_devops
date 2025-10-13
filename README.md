@@ -22,7 +22,7 @@ Tous les travaux dirigés sont également disponibles sur le drive et dans [le d
 
 [TD n°4](./tds/td4.md) : Test Driven Development
 
-[TD n°5 et 6](./projet/README.md) : **PROJET**.
+[TD n°5 et 6](./projet) : **PROJET**.
 
 > [!TIP]
 > Tous les TDs vous servirons à la réalisation du projet final.
