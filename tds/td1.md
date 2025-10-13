@@ -41,3 +41,4 @@ Vous avez terminés les exercices ? **Bien joué !** mais pouvez-vous répondre 
 **Documentations**
 * Git : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git
 * GitHub : https://github.com
+* GitHub : https://github.blog/
