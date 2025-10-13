@@ -10,7 +10,7 @@ Si vous êtes ici c'est que vous venez avez un compte GitHub.
 
 Jouons avec l'outil `git`
 
-Rendez-vous sur [https://learngitbranching.js.org/](ttps://learngitbranching.js.org/). En suivant les instructions de chaque exercice, complétez chacun des niveaux.
+Rendez-vous sur [https://learngitbranching.js.org/](https://learngitbranching.js.org/). En suivant les instructions de chaque exercice, complétez chacun des niveaux.
 
 > [!IMPORTANT]
 > Appelez-moi pour valider la complétion.
