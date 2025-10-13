@@ -17,7 +17,7 @@ Retrouver tous les détails concernant ce projet dans le fichier [./sujet.md](./
 Pour réaliser le projet vous disposer des deux dernières séances de TDs et du projet GitHub suivant: https://github.com/JeromeMSD/projet_devops-ilia-2024-5. Ce dépôt GitHub sera commun à l'ensemble des ILIA.
 
 > [!important]
-> Fin du projet le `Lundi 3 novembre 2025 à 23h59`.
+> Fin du projet le `Mercredi 5 novembre 2025 à 23h59`.
 
 Le but de ce projet est de vous faire travailler ensemble sur un même objectif.
 L’historique des changements du dépôt projet devra donc montrer la collaboration entre les membres du groupe.
