@@ -1,13 +1,13 @@
-[![uB](img/UB.png)](https://u-bourgogne.fr/) | ESIREM - 4A - ILIA <br/> DevOps <br/><br/> **[ EXAMEN PRATIQUE ]** | [![ESIREM](img/ESIREM.png)](https://esirem.u-bourgogne.fr/)
+[![uB](https://upload.wikimedia.org/wikipedia/fr/c/cc/Logo_EPE_Universit%C3%A9_Bourgogne_Europe.svg)](https://u-bourgogne.fr/) | ESIREM - 4A - ILIA - DevOps <br/><br/> **[ EXAMEN PRATIQUE ]** | [![ESIREM](https://polytech.ube.fr/wp-content/uploads/2023/02/Logo_Reseau_Polytech.svg_-300x191.png)](https://esirem.u-bourgogne.fr/)
 :--- |:------------------------------------------------------------------:| ---:
 ||                  ||
 
-# Sujet projet - Année 2024/2025
+# Sujet projet - Année 2025
 
 > [!warning]
 > Avant de commencer, veiller à prendre connaissance des attentes projet [./README.md#exigences-du-projet](./README.md#exigences-du-projet).
 
-Ce projet est à rendre au plus tard le `Jeudi 16 Janvier 2025 à 23h59`. À partir de cette date, aucun changement (commit, issue ou pull_request) ne sera pris en compte pour la notation.
+Ce projet est à rendre au plus tard le `Mercredi 5 novembre 2025 à 23h59`. À partir de cette date, aucun changement (commit, issue ou pull_request) ne sera pris en compte pour la notation.
 
 [![Twitter](https://f.hellowork.com/blogdumoderateur/2023/07/X-Twitter-Logo-origine.jpg)](https://x.com)
 
