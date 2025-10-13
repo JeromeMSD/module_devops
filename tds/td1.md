@@ -15,17 +15,26 @@ Rendez-vous sur [https://learngitbranching.js.org/](https://learngitbranching.js
 > [!IMPORTANT]
 > Appelez-moi pour valider la complétion.
 
-#### Questions
+---
+
+### Questions
 
 Vous avez terminés les exercices ? **Bien joué !** mais pouvez-vous répondre à ces trois questions.
 
-1. Quelle est la différence entre `git reset HEAD^1` et `git revert [last_commit]` ?
+1. Quelle est la différence entre les commandes suivantes ? 
+    ```bash 
+    git reset HEAD^1
+    ```
+    ```bash 
+    git revert [last_commit]
+    ```
 2. A quoi sert `git fetch` ?
 3. Que font les commandes suivantes ?
     ```sh
     git checkout main
     git rebase bugFix
     ```
+
 
 ---
 
