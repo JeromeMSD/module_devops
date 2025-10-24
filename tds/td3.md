@@ -37,6 +37,31 @@ Accéder à votre serveur via votre navigateur à l'addresse http://localhost:50
 > [!tip]
 > Si vous utilisez CodeSpace, suivez le lien qui s'affiche dans la pop-up en bas à droite.
 
+Ajoutez des endpoints (route) supplémentaires: 
+- La route `/` renverra désormais une chaine de caractère de votre choix (e.g. `Hello, ceci est un compteur` avec la liste des routes disponibles)
+- La route `/cpt` renvoie la valeur d'un compteur stocké en variable d'environnement.
+- La route `/incr` incrémente du compteur stocké en variable d'environnement.
+- La route `/decr` decrémente du compteur stocké en variable d'environnement.
+
+Testez tous ces endpoints localement avec la commande: `flask run`.
+
+#### Conteneurisation
+
+Nous allons utiliser docker pour conteneuriser ce backend: [Les commmandes Docker](https://docs.docker.com/get-started/docker_cheatsheet.pdf)
+
+Créez votre premier Dockerfile et tester le avec la commande `docker build . `
+
+- Image de base pour l'environnement: `alpine:3.22.2` (cf. [Docker Image](https://hub.docker.com/layers/library/alpine/3.22.2/images/sha256-9eec16c5eada75150a82666ba0ad6df76b164a6f8582ba5cb964c0813fa56625))
+   > Le manager de packet de alpine est `apk`, ajouter des packets avec la commande `apk add flask`
+- Copier le fichier `server.py` dans le conteneur.
+- Le port d'exposition est le `5000`.
+- La comande de lancement du conteneur devrait être : `flask run`
+
+> [!warning]
+> Attention, nous construisons un environnement d'execution dédié, toutes les librairies installées locallement sont à ajouter au Dockefile.
+
+Executer le conteneur et verifier son fonctionnement.
+
 ### Frontend
 
 
