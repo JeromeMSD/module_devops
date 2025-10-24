@@ -30,7 +30,7 @@ Si ce n'est pas déjà fait:
 
 Dans le dossier `backend`, créer un fichier `server.py` contenant l'implementation d'un serveur Flask (documentation: [Flask](https://flask.palletsprojects.com/en/stable/quickstart/)).
 
-Vous devriez pouvoir exécuter le serveur avec la commande: `flask run`
+Vous devriez pouvoir exécuter le serveur avec la commande: `flask --app server.py run`
 
 Accéder à votre serveur via votre navigateur à l'addresse http://localhost:5000. Vous venez de créer votre premier serveur 🚀
 
@@ -40,8 +40,8 @@ Accéder à votre serveur via votre navigateur à l'addresse http://localhost:50
 Ajoutez des endpoints (route) supplémentaires: 
 - La route `/` renverra désormais une chaine de caractère de votre choix (e.g. `Hello, ceci est un compteur` avec la liste des routes disponibles)
 - La route `/cpt` renvoie la valeur d'un compteur stocké en variable d'environnement.
-- La route `/incr` incrémente du compteur stocké en variable d'environnement.
-- La route `/decr` decrémente du compteur stocké en variable d'environnement.
+- La route `/incr` incrémente du compteur stocké en variable locale.
+- La route `/decr` decrémente du compteur stocké en variable locale.
 
 Testez tous ces endpoints localement avec la commande: `flask run`.
 
