@@ -39,7 +39,7 @@ Accéder à votre serveur via votre navigateur à l'addresse http://localhost:50
 
 Ajoutez des endpoints (route) supplémentaires: 
 - La route `/` renverra désormais une chaine de caractère de votre choix (e.g. `Hello, ceci est un compteur` avec la liste des routes disponibles)
-- La route `/cpt` renvoie la valeur d'un compteur stocké en variable d'environnement.
+- La route `/cpt` renvoie la valeur d'un compteur stocké en variable locale.
 - La route `/incr` incrémente du compteur stocké en variable locale.
 - La route `/decr` decrémente du compteur stocké en variable locale.
 
