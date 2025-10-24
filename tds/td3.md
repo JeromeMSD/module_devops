@@ -49,13 +49,15 @@ Testez tous ces endpoints localement avec la commande: `flask run`.
 
 Nous allons utiliser docker pour conteneuriser ce backend: [Les commmandes Docker](https://docs.docker.com/get-started/docker_cheatsheet.pdf)
 
-Créez votre premier Dockerfile et tester le avec la commande `docker build .` ( l'option `-t backend` vous permettra de donner un nom à la machine et donc de la retrouver et l'utiliser plus facilement) 
+Créez votre premier [Dockerfile](https://medium.com/@oap.py/dockerfile-cheat-sheet-4ad12569aa0b).
 
 - Image de base pour l'environnement: `alpine:3.22.2` (cf. [Docker Image](https://hub.docker.com/layers/library/alpine/3.22.2/images/sha256-9eec16c5eada75150a82666ba0ad6df76b164a6f8582ba5cb964c0813fa56625))
    > Le manager de packet de alpine est `apk`, ajouter des packets avec la commande `apk add flask`
 - Copier le fichier `server.py` dans le conteneur.
 - Le port d'exposition est le `5000`.
 - La comande de lancement du conteneur devrait être : `flask run`
+
+Testez le avec la commande `docker build .` ( l'option `-t backend` vous permettra de donner un nom à la machine et donc de la retrouver et l'utiliser plus facilement) 
 
 > [!warning]
 > Attention, nous construisons un environnement d'execution dédié, toutes les librairies installées locallement sont à ajouter au Dockefile.
