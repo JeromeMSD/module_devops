@@ -123,6 +123,11 @@ Via un navigateur, tester votre frontend conteneurisé 🚀
 
 ---
 
+> [!important]
+> Le lancement de tous les conteneurs sur votre machine via `docker run` doit vous permettre d'utiliser le compteur dans votre navigateur.
+
+---
+
 ## docker-compose
 
 Nous allons utiliser `docker-compose` pour unifié le déploiement d'une ensemble de conteneur sur votre machine.
