@@ -49,7 +49,7 @@ Testez tous ces endpoints localement avec la commande: `flask run`.
 
 Nous allons utiliser docker pour conteneuriser ce backend: [Les commmandes Docker](https://docs.docker.com/get-started/docker_cheatsheet.pdf)
 
-Créez votre premier Dockerfile et tester le avec la commande `docker build . `
+Créez votre premier Dockerfile et tester le avec la commande `docker build .` ( l'option `-t backend` vous permettra de donner un nom à la machine et donc de la retrouver et l'utiliser plus facilement) 
 
 - Image de base pour l'environnement: `alpine:3.22.2` (cf. [Docker Image](https://hub.docker.com/layers/library/alpine/3.22.2/images/sha256-9eec16c5eada75150a82666ba0ad6df76b164a6f8582ba5cb964c0813fa56625))
    > Le manager de packet de alpine est `apk`, ajouter des packets avec la commande `apk add flask`
@@ -64,6 +64,64 @@ Executer le conteneur et verifier son fonctionnement.
 
 ### Frontend
 
+Nous allons maintenant mettre en place un frontend qui va s'interfacer avec notre backend.
+
+#### Implémentation
+
+Nous allons l'implémenter via la stack HTML/CSS/JS.
+
+1. Dans le dossier `frontend`, créez les fichiers suivants : `index.html`, `app.js`
+2. Servez le dossier `frontend` en ouvrant le fichier `index.html` avec un navigateur ou avec l’extension **Live Server** de VS Code.
+> Si rien ne se passe, accéder à la console de votre navigateur avec `F12`.
+
+> [!note]
+> Si vos requêtes `fetch` sont bloquées, verifiez que vous autorisez bien les CORS côté Flask (backend) :
+> ```python
+> # backend/server.py
+> from flask_cors import CORS
+> CORS(app)
+> ```
+> si nécessaire : Installez `flask-cors` via `pip install flask-cors`.
+
+Le fichier `index.html` doit contenir une page avec :
+- Un titre et un court texte rappelant les routes disponibles.
+- Un bloc **Compteur** avec :
+  - l’affichage de la valeur,
+  - un bouton **+1** (incrément),
+  - un bouton **−1** (décrément),
+  - un bouton **Rafraîchir** (relecture depuis `/cpt`).
+- Un espace **Status** pour afficher “Chargement…”, “OK”, ou un message d’erreur.
+
+> [!tip]
+> Les fichiers `.html` peuvent être ouvert avec un navigateur web pour en voir le contenu.
+> 
+> Vous pouvez prendre un peu de temps pour faire de la mise en forme via [CSS](https://developer.mozilla.org/fr/docs/Learn/CSS/First_steps/Getting_started).
+
+#### Conteneurisation
+
+Conteneuriser le frontend and un conteneur serveur web simple. Dans un dossier `frontend`, exécuter les actions suivantes :
+
+1. Nous allons utiliser `nginx` pour servir cette page. ( cf. [Liens utiles](#liens-utiles) ). <br> Créer un `Dockerfile` qui se base sur la dernière version de l'image `nginx`.
+2. Ajouter les fichiers au conteneur via le paramêtre `COPY`.
+   ```dockerfile
+    COPY index.html /usr/share/nginx/html/
+    # Si vous avez d'autres fichiers ou dossier, copier les également
+    COPY ./img /usr/share/nginx/html
+   ```
+
+3. Préciser le port d'ouverture du conteneur via le paramètre `EXPOSE`, il s'agit du port servi par `nginx` ( `80` par défaut ).
+
+**Quel est le point d'entrée de l'application ? Quelle commande va s'executer au démarrage du conteneur ?**
+
+4. Nous avons décrit notre conteneur, construiser maintenant l'image de ce conteneur via la commande `docker build`.
+5. Executer votre conteneur via `docker run`.
+
+Via un navigateur, tester votre frontend conteneurisé 🚀
+
+> [!tip]
+> Des difficultés à y acceder ? vérifié que le conteneur en execution est bien associé à une port de votre machine. (cf. [Les commmandes Docker](https://docs.docker.com/get-started/docker_cheatsheet.pdf))
+
+---
 
 ## docker-compose
 
@@ -180,3 +238,12 @@ Scanner l'ensemble des fichiers du dossier de votre dépôt en local avec `trivy
 #### Bonus - Tout ça en plus simple
 
 Trivy dispose d'une GitHub Action ! Via les informations de [ce dépôt](https://github.com/aquasecurity/trivy-action) et le Market Place des GitHub Action. Mettez en place sur votre dépôt une GitHub Action qui scan les images issues de vos Dockerfiles.
+
+---
+
+##### Liens utiles
+
+* [Docker](https://docs.docker.com/get-started/docker_cheatsheet.pdf)
+* [Dockerfile](https://kapeli.com/cheat_sheets/Dockerfile.docset/Contents/Resources/Documents/index)
+* [NGINX](https://nginx.org/en/docs/)
+* [RabbitMQ](https://www.rabbitmq.com/docs)
