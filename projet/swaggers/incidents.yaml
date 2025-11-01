@@ -1,0 +1,222 @@
+openapi: 3.0.3
+info:
+  title: PolyStatus - Incidents API 
+  version: 1.0.0
+servers:
+  - url: http://localhost:8081
+paths:
+  /api/v1/incidents:
+    post:
+      summary: Créer un nouvel incident
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentCreate'
+      responses:
+        "201":
+          description: Incident créé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        "400": { description: Requête invalide }
+    get:
+      summary: Lister les incidents
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [open, mitigated, resolved]
+        - in: query
+          name: sev
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 4
+        - in: query
+          name: service
+          schema:
+            type: string
+        - in: query
+          name: q
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Liste d'incidents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Incident'
+
+  /api/v1/incidents/{id}:
+    get:
+      summary: Obtenir un incident par id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Détails de l'incident
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        "404": { description: Introuvable }
+
+  /api/v1/incidents/{id}/assign:
+    post:
+      summary: Assigner un incident
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignRequest'
+      responses:
+        "200":
+          description: Incident mis à jour
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        "400": { description: Requête invalide }
+        "404": { description: Introuvable }
+
+  /api/v1/incidents/{id}/status:
+    post:
+      summary: Mettre à jour le statut d'un incident
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatusUpdate'
+      responses:
+        "200":
+          description: Incident mis à jour
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        "404": { description: Introuvable }
+
+  /api/v1/incidents/{id}/timeline:
+    post:
+      summary: Ajouter un événement dans la timeline
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimelineEventCreate'
+      responses:
+        "200": { description: Événement ajouté }
+        "404": { description: Introuvable }
+
+  /api/v1/incidents/{id}/postmortem:
+    post:
+      summary: Créer ou modifier le postmortem d'un incident
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Postmortem'
+      responses:
+        "200": { description: Postmortem enregistré }
+        "404": { description: Introuvable }
+
+components:
+  schemas:
+    Incident:
+      type: object
+      properties:
+        id: { type: string, example: "INC-AB12CD" }
+        title: { type: string, example: "Latence API EU" }
+        sev: { type: integer, minimum: 1, maximum: 4, example: 2 }
+        services:
+          type: array
+          items: { type: string }
+          example: ["api", "db"]
+        summary: { type: string, example: "p95 > 2s en EU-West" }
+        status: { type: string, enum: [open, mitigated, resolved], example: open }
+        started_at: { type: integer, example: 1730073600 }
+        commander: { type: string, nullable: true, example: "f6c74e13-8b4a-4b63-bf58-1c59a0c21840" }
+
+    IncidentCreate:
+      type: object
+      required: [title, sev]
+      properties:
+        title: { type: string }
+        sev: { type: integer, minimum: 1, maximum: 4 }
+        services:
+          type: array
+          items: { type: string }
+        summary: { type: string }
+
+    AssignRequest:
+      type: object
+      required: [commander]
+      properties:
+        commander: { type: string, description: "User ID" }
+
+    StatusUpdate:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [open, mitigated, resolved]
+
+    TimelineEventCreate:
+      type: object
+      required: [type, message]
+      properties:
+        type:
+          type: string
+          enum: [update, note, mitigation, resolution]
+        message:
+          type: string
+
+    Postmortem:
+      type: object
+      required: [what_happened, root_cause, action_items]
+      properties:
+        what_happened: { type: string }
+        root_cause: { type: string }
+        action_items:
+          type: array
+          items: { type: string }

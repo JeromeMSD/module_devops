@@ -1,0 +1,126 @@
+
+openapi: 3.0.3
+info:
+  title: PolyStatus - Communications API 
+  version: 1.0.0
+servers:
+  - url: http://localhost:8082
+paths:
+  /api/v1/public/announce:
+    post:
+      summary: Publier une annonce publique liée à un incident
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicAnnouncement'
+      responses:
+        "201":
+          description: Annonce créée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicAnnouncementResponse'
+        "400": { description: Requête invalide }
+
+  /api/v1/public/status:
+    get:
+      summary: Récupérer le statut public global
+      responses:
+        "200":
+          description: Liste d'incidents publics et leurs messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicIncidentStatus'
+
+  /api/v1/subscriptions/email:
+    post:
+      summary: Ajouter un abonné email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "user@example.com"
+      responses:
+        "201":
+          description: Abonnement enregistré
+        "400": { description: Requête invalide }
+
+  /api/v1/webhooks:
+    post:
+      summary: Enregistrer un webhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [url]
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  example: "https://hooks.example.com/polystatus"
+      responses:
+        "201":
+          description: Webhook enregistré
+        "400": { description: Requête invalide }
+
+components:
+  schemas:
+    PublicAnnouncement:
+      type: object
+      required: [incident_id, message, state]
+      properties:
+        incident_id:
+          type: string
+          example: "INC-123456"
+        message:
+          type: string
+          example: "Incident en cours pour la région EU"
+        state:
+          type: string
+          enum: [investigating, identified, monitoring, resolved]
+          example: "investigating"
+
+    PublicAnnouncementResponse:
+      type: object
+      properties:
+        ts:
+          type: integer
+          example: 1730073600
+        message:
+          type: string
+          example: "Incident en cours pour la région EU"
+        state:
+          type: string
+          example: "investigating"
+
+    PublicIncidentStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "INC-123456"
+        title:
+          type: string
+          example: "Latence API Europe"
+        sev:
+          type: integer
+          example: 2
+        status:
+          type: string
+          example: "open"
+        last_public:
+          $ref: '#/components/schemas/PublicAnnouncementResponse'

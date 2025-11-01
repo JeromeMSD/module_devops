@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+  title: PolyStatus - Users API
+  description: API de gestion des utilisateurs pour l'application PolyStatus.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Serveur local de développement
+
+paths:
+  /api/v1/users:
+    post:
+      summary: Créer un utilisateur
+      description: Permet de créer un nouvel utilisateur dans le système.
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+      responses:
+        "201":
+          description: Utilisateur créé avec succès.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Données invalides.
+    get:
+      summary: Lister les utilisateurs
+      description: Retourne la liste de tous les utilisateurs enregistrés.
+      operationId: listUsers
+      responses:
+        "200":
+          description: Liste d'utilisateurs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+  /api/v1/users/{id}:
+    get:
+      summary: Obtenir un utilisateur
+      description: Récupère les détails d’un utilisateur spécifique.
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de l'utilisateur.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Détails de l'utilisateur.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "404":
+          description: Utilisateur non trouvé.
+    put:
+      summary: Mettre à jour un utilisateur
+      description: Modifie les détails d’un utilisateur existant.
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de l'utilisateur.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        "200":
+          description: Mise à jour réussie.
+        "400":
+          description: Données invalides.
+        "404":
+          description: Utilisateur non trouvé.
+
+  /api/v1/auth/login:
+    post:
+      summary: Connexion utilisateur
+      description: Authentifie un utilisateur et retourne un token d’accès.
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        "200":
+          description: Connexion réussie.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        "401":
+          description: Identifiants invalides.
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "f6c74e13-8b4a-4b63-bf58-1c59a0c21840"
+        name:
+          type: string
+          example: "Alice Dupont"
+        email:
+          type: string
+          format: email
+          example: "alice@example.com"
+        role:
+          type: string
+          example: "manager"
+        team:
+          type: string
+          example: "SRE"
+        created_at:
+          type: integer
+          example: 1730073600
+
+    UserCreate:
+      type: object
+      required: [name, email]
+      properties:
+        name:
+          type: string
+          example: "Alice Dupont"
+        email:
+          type: string
+          format: email
+          example: "alice@example.com"
+        role:
+          type: string
+          example: "viewer"
+        team:
+          type: string
+          example: "Ops"
+
+    UserUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+        team:
+          type: string
+
+    LoginRequest:
+      type: object
+      required: [email]
+      properties:
+        email:
+          type: string
+          format: email
+          example: "alice@example.com"
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        user_id:
+          type: string
+          example: "f6c74e13-8b4a-4b63-bf58-1c59a0c21840"

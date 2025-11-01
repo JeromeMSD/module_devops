@@ -1,0 +1,150 @@
+
+openapi: 3.0.3
+info:
+  title: PolyStatus - Feature Flags API 
+  version: 1.0.0
+servers:
+  - url: http://localhost:8070
+paths:
+  /flags:
+    get:
+      summary: Récupérer les feature flags applicables à un utilisateur
+      parameters:
+        - in: query
+          name: user
+          required: true
+          schema:
+            type: string
+            example: "alice"
+        - in: query
+          name: role
+          required: true
+          schema:
+            type: string
+            example: "manager"
+      responses:
+        "200":
+          description: Objet contenant les flags et leurs variations
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    variation:
+                      type: string
+                      example: "on"
+                    off:
+                      type: boolean
+                      example: false
+
+  /admin/flags:
+    get:
+      summary: Récupérer la liste des feature flags existants
+      responses:
+        "200":
+          description: Liste des feature flags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlagDefinition'
+    post:
+      summary: Créer ou mettre à jour un feature flag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FlagDefinition'
+      responses:
+        "201":
+          description: Feature flag créé
+        "200":
+          description: Feature flag mis à jour
+
+  /admin/toggle/{id}:
+    post:
+      summary: Activer ou désactiver un feature flag existant
+      parameters:
+        - in: path
+          name: key
+          required: true
+          schema:
+            type: string
+            example: "public_status_enabled"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                on:
+                  type: boolean
+                  example: true
+      responses:
+        "200":
+          description: Flag mis à jour
+        "404":
+          description: Flag introuvable
+
+components:
+  schemas:
+    FlagDefinition:
+      type: object
+      required: [id, on]
+      properties:
+        id:
+          type: string
+          example: "public_status_enabled"
+        on:
+          type: boolean
+          example: true
+        kind:
+          type: string
+          enum: [boolean, multivar]
+          example: "boolean"
+        variations:
+          type: array
+          items:
+            type: string
+          example: ["on", "off"]
+        fallthrough:
+          type: object
+          properties:
+            variation:
+              type: string
+              example: "on"
+        rules:
+          type: array
+          items:
+            type: object
+            properties:
+              if:
+                type: object
+                properties:
+                  attr:
+                    type: string
+                    example: "role"
+                  op:
+                    type: string
+                    example: "eq"
+                  value:
+                    type: string
+                    example: "manager"
+              variation:
+                type: string
+                example: "on"
+        targets:
+          type: object
+          properties:
+            users:
+              type: object
+              additionalProperties:
+                type: string
+              example:
+                alice: "on"
+                bob: "off"

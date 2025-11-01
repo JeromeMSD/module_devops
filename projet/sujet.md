@@ -1,6 +1,6 @@
-[![uB](https://upload.wikimedia.org/wikipedia/fr/c/cc/Logo_EPE_Universit%C3%A9_Bourgogne_Europe.svg)](https://u-bourgogne.fr/) | Polytech Dijon - 4A - ILIA - DevOps <br/><br/> **[ EXAMEN PRATIQUE ]** | [![ESIREM](https://polytech.ube.fr/wp-content/uploads/2023/02/Logo_Reseau_Polytech.svg_-300x191.png)](https://esirem.u-bourgogne.fr/)
-:--- |:------------------------------------------------------------------:| ---:
-||                  ||
+| [![uB](https://upload.wikimedia.org/wikipedia/fr/c/cc/Logo_EPE_Universit%C3%A9_Bourgogne_Europe.svg)](https://u-bourgogne.fr/) | Polytech Dijon - 4A - ILIA - DevOps <br/><br/> **[ EXAMEN PRATIQUE ]** | [![ESIREM](https://polytech.ube.fr/wp-content/uploads/2023/02/Logo_Reseau_Polytech.svg_-300x191.png)](https://esirem.u-bourgogne.fr/) |
+|--------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                                |                                                                        |                                                                                                                                       |
 
 # Sujet projet - Année 2025
 
@@ -19,7 +19,10 @@ Au cours de ce projet, nous allons réaliser les différentes composantes micros
 
 Concevoir une grappe de microservice composée d'API simples `Python/Flask` et d'un frontend. Cet ensemble permettra de répondre aux fonctionnalités suivantes :
 
-* ToBeDefined 
+- **Permettre le suivi d'incident** — création, suivi, timeline, changement de statut, assignation et postmortem détaillé.
+- **Gérer différent type d'utilisateurs et des SREs** pour permettre d'attribuer les actions à réaliser, les référents des incidents.
+- Récupérer les status officiels et annonces des fournisseurs, voir les liens de cause à effet entre les différents providers.
+- **Surveillance automatique** des status pages cloud (AWS, GCP, Cloudflare…) et création d’incidents à partir de ces sources.
 
 Via la déclaration de route `GET` et `POST` vous définirez les fonctions pour répondre aux fonctionnalités si dessus ☝️
 
@@ -35,9 +38,15 @@ Via la déclaration de route `GET` et `POST` vous définirez les fonctions pour 
 > [!note]
 > Chacun des microservices et le frontend feront l'objet d'un dossier dans le dépôt. (cf. [./README.md#exigences-du-projet](./README.md#exigences-du-projet))
 
----
+### Détails d'implémentation
 
-### Gestion des objets (API REST et JSON)
+#### Routes par microservice
+
+Afin de permettre aux différents microservices de communiquer entre eux, nous allons définir des standards. Standards qui
+permettront de savoir comment appeler chaque microservice et quel sera le format de la réponse reçue.
+Ces standards devront, pour chaque microservice, être répertorié dans un fichier `swagger.yaml`.
+
+#### Gestion des objets (API REST et JSON)
 
 L'envoie et le retour de données dans les requêtes et les reponses `HTTP` peut être simplifié via l'utilisation de structure [`JSON`](https://fr.wikipedia.org/wiki/JavaScript_Object_Notation). Vous pourrez gérer vos traitements et/ou transformation de donnée ou de message dans les routes de votre API.
 
@@ -48,6 +57,103 @@ Testez vos routes avec la commande `curl`.
 
 > [!note]
 > Gardez en tête l'objectif d'autonomie des microservices, l'idée est de créer des [API REST ](https://www.redhat.com/fr/topics/api/what-is-a-rest-api).
+
+#### Exemple de route
+
+Pour des **exemples** de routes définit comme suit, vous trouverez un **exemple** de swagger associé.
+
+> [!caution]
+> Le fichier `swagger.yaml` doit être à jour en tout temps, pour permettre aux autres équipes de savoir comment requêter votre API.
+
+**users**
+
+| Route                     | Action                                            | Reponse                                                 |
+|---------------------------|---------------------------------------------------|---------------------------------------------------------|
+| `POST /api/v1/users`      | Permet de créer un utilisateur.                   | Retourne un HTTP code de succès (HTTP 200). (si succès) |
+| `POST /api/v1/auth/login` | Permet la connection de l'utilisateur.            | Retourne un token.                                      |
+| `GET /api/v1/users`       | Permet de récupérer la liste des utilisateurs.    | Retourne une liste.                                     |
+| `GET /api/v1/users/<id>`  | Permet de récupérer les détails d'un utilisateur. | Retourne un objet JSON représentant un utilisateur.     |
+| `PUT /api/v1/users/<id>`  | Permet de modifier les détails d'un utilisateur.  | Retourne un HTTP code de succès.                        |
+
+> Exemple de swagger pour le microservice utilisateurs: [./swaggers/users.yaml](./swaggers/users.yaml)
+
+**incidents**
+
+| **Route / Endpoint**                     | **Action**                                                                            | **Réponse**                                             |
+|------------------------------------------|---------------------------------------------------------------------------------------|---------------------------------------------------------|
+| `POST /api/v1/incidents`                 | Créer un nouvel incident                                                              | Retourne un **objet JSON** représentant l’incident créé |
+| `GET /api/v1/incidents`                  | Lister les incidents                                                                  | Retourne une **liste JSON** d’incidents                 |
+| `GET /api/v1/incidents/<id>`             | Récupérer les détails d’un incident par id                                            | Retourne un **objet JSON** représentant l’incident      |
+| `POST /api/v1/incidents/<id>/assign`     | Assigner un incident                                                                  | Retourne l’incident mis à jour                          |
+| `POST /api/v1/incidents/<id>/status`     | Mettre à jour le **statut** d’un incident (`open`, `mitigated`, `resolved`)           | Retourne l’incident avec son nouveau statut             |
+| `POST /api/v1/incidents/<id>/timeline`   | Ajouter un **événement** dans la timeline (note, mise à jour, mitigation, résolution) | Retourne un code HTTP 200  (si succès)                  |
+| `POST /api/v1/incidents/<id>/postmortem` | Soumettre ou modifier le **postmortem** d’un incident                                 | Retourne un code HTTP 200 (si succès)                   |
+
+> Exemple de swagger pour le microservice d'incident: [./swaggers/incidents.yaml](./swaggers/incidents.yaml)
+
+**communication**
+
+| **Route / Endpoint**               | **Action**                                                                              | **Réponse**                                                                               |
+| ---------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `POST /api/v1/public/announce`     | Publier une **annonce publique** liée à un incident (message et état)                   | Retourne un **objet JSON** représentant l’annonce créée (**HTTP 201**)                    |
+| `GET /api/v1/public/status`        | Récupérer le **statut public** global (incidents en cours ou récents)                   | Retourne une **liste JSON** d’incidents publics et leurs derniers messages (**HTTP 200**) |
+| `POST /api/v1/subscriptions/email` | Ajouter une **adresse email** à la liste des abonnés pour recevoir les annonces         | Retourne un **code HTTP 201** (succès de l’abonnement)                                    |
+| `POST /api/v1/webhooks`            | Enregistrer un **webhook** pour notifier un système externe lors de nouveaux événements | Retourne un **code HTTP 201** (webhook enregistré avec succès)                            |
+
+> Exemple de swagger pour le microservice de communications: [./swaggers/comms.yaml](./swaggers/comms.yaml)
+
+**csp-ingestor**
+
+| **Route / Endpoint**                           | **Action**                                                                         | **Réponse**                                                            |
+|------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `POST /api/v1/csp/providers`                   | Ajouter un **fournisseur cloud** (CSP) à surveiller, avec son flux de statut       |  Retourne un **code HTTP 201** confirmant l’enregistrement du provider |
+| `POST /api/v1/csp/refresh?provider=cloudflare` | Rafraîchir manuellement les **événements de statut** pour un provider donné        | Retourne un **objet JSON** avec le résultat du rafraîchissement        |
+| `GET /api/v1/csp/events?active=true`           | Récupérer la liste des **incidents actifs détectés** chez les fournisseurs CSP     | Retourne une **liste JSON** d’événements                               |
+| `POST /api/v1/incidents`                       | Création d’un incident interne lorsqu’un événement critique est détecté sur un CSP | Retourne un **objet JSON** de l’incident créé avec le champ            |
+
+> Exemple de swagger pour le microservice csp-ingestor: [./swaggers/csp.yaml](./swaggers/csp.yaml)
+
+**flags**
+
+| **Route / Endpoint**                 | **Action**                                                                             | **Réponse**                                                                                          |
+|--------------------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| `GET /flags?user=<user>&role=<role>` | Récupérer la liste des **feature flags** applicables à un utilisateur selon son rôle   | Retourne un **objet JSON** contenant les flags et leurs variations                                   |
+| `GET /admin/flags`                   | Récupérer la liste des **feature flag**  existant                                      | Retourne la liste des features flags existants                                                       |
+| `GET /admin/flags`                   | Récupérer la liste des **feature flag**  existant                                      | Retourne un objets avec des listes des features flags activés par un utilisateur et/ou par un groupe |
+| `POST /admin/flags/`                 | Créer ou mettre à jour un **feature flag**                                             | Retourne un **code HTTP 201** ou **200** selon la création ou la mise à jour                         |
+| `POST /admin/toggle/<key>`           | Activer ou désactiver un **feature flag** existant                                     | Retourne un **code HTTP 200** (si succès de la modification)                                         |
+
+> Exemple de swagger pour le microservice de feature flags: [./swaggers/flags.yaml](./swaggers/flags.yaml)
+
+> [!tip]
+> Le YAML n'est pas clair ? Vous pouvez le passer dans https://editor.swagger.io
+
+---
+
+### Informations fonctionnelles
+
+#### Annonces
+
+Les annonces seront majoritairement gérées au niveau de l'application mais vous pouvez mettre en place une interconnection avec un service SMTP.
+
+#### CSP-ingestor
+
+L'ingestion des informations des Cloud Service Provider peut se faire par scrapping de site web, mais je vous recommande d'intégrer dans un premier temps les CSP qui propose une APIs d'incident.
+
+- https://www.cloudflarestatus.com/api
+- https://www.githubstatus.com/api
+- https://status.cloud.google.com/incidents.json
+- https://status.atlassian.com/api
+
+Autre page à intégrer: [AWS](https://health.aws.amazon.com/health/status), [GitLab](https://status.gitlab.com/), [Docker](https://www.dockerstatus.com/).
+Ou tout autre application de votre choix ! 🚀
+
+> [!tip]
+> Vous pouvez aussi mettre en place de l'intégration de flux RSS.
+> 
+> Si votre application préférée ne propose pas de status page, vous pouvez faire un appel HTTP pour confirmer leur disponibilité !
+
+---
 
 ### Stockage
 

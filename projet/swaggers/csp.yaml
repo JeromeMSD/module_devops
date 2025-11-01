@@ -1,0 +1,165 @@
+
+openapi: 3.0.3
+info:
+  title: PolyStatus - CSP Ingestor API 
+  version: 1.0.0
+servers:
+  - url: http://localhost:8083
+paths:
+  /api/v1/csp/providers:
+    post:
+      summary: Ajouter un fournisseur cloud (CSP) à surveiller
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderCreate'
+      responses:
+        "201":
+          description: Provider enregistré avec succès
+        "400":
+          description: Requête invalide
+
+  /api/v1/csp/refresh:
+    post:
+      summary: Rafraîchir les événements de statut pour un provider donné
+      parameters:
+        - in: query
+          name: provider
+          required: true
+          schema:
+            type: string
+            example: "cloudflare"
+      responses:
+        "200":
+          description: Résultat du rafraîchissement
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        "400":
+          description: Provider invalide
+
+  /api/v1/csp/events:
+    get:
+      summary: Récupérer la liste des incidents actifs détectés chez les CSP
+      parameters:
+        - in: query
+          name: active
+          schema:
+            type: boolean
+            example: true
+      responses:
+        "200":
+          description: Liste d'événements CSP
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CspEvent'
+
+  /api/v1/incidents:
+    post:
+      summary: Créer un incident interne depuis un événement CSP critique
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentCreate'
+      responses:
+        "201":
+          description: Incident créé avec le champ source="csp"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        "400":
+          description: Requête invalide
+
+components:
+  schemas:
+    ProviderCreate:
+      type: object
+      required: [name, feed_url, type]
+      properties:
+        name:
+          type: string
+          example: "aws"
+        feed_url:
+          type: string
+          format: uri
+          example: "https://status.aws.amazon.com/rss/ec2-us-east-1.rss"
+        type:
+          type: string
+          enum: [rss, json]
+          example: "rss"
+
+    CspEvent:
+      type: object
+      properties:
+        provider:
+          type: string
+          example: "cloudflare"
+        service:
+          type: string
+          example: "cdn"
+        title:
+          type: string
+          example: "Elevated errors in Europe"
+        status:
+          type: string
+          example: "investigating"
+        ts_start:
+          type: integer
+          example: 1730073600
+        ts_update:
+          type: integer
+          example: 1730077200
+
+    IncidentCreate:
+      type: object
+      required: [title, sev, source]
+      properties:
+        title:
+          type: string
+          example: "Cloudflare CDN errors in Europe"
+        sev:
+          type: integer
+          example: 2
+        source:
+          type: string
+          example: "csp"
+        services:
+          type: array
+          items:
+            type: string
+          example: ["cdn"]
+        summary:
+          type: string
+          example: "Detected Cloudflare outage affecting European regions"
+
+    Incident:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "INC-123456"
+        title:
+          type: string
+          example: "Cloudflare CDN errors in Europe"
+        sev:
+          type: integer
+          example: 2
+        status:
+          type: string
+          example: "open"
+        source:
+          type: string
+          example: "csp"
+        started_at:
+          type: integer
+          example: 1730073600
