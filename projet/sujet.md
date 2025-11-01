@@ -146,7 +146,7 @@ L'ingestion des informations des Cloud Service Provider peut se faire par scrapp
 - https://status.atlassian.com/api
 
 Autre page à intégrer: [AWS](https://health.aws.amazon.com/health/status), [GitLab](https://status.gitlab.com/), [Docker](https://www.dockerstatus.com/).
-Ou tout autre application de votre choix ! 🚀
+Ou toute autre application de votre choix ! 🚀
 
 > [!tip]
 > Vous pouvez aussi mettre en place de l'intégration de flux RSS.
